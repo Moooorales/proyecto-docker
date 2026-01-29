@@ -2,17 +2,14 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.send('Servicio 1 (Backend) funcionando - Listo para integración');
+app.get('/health', (req, res) => {
+    res.json({ status: 'UP', message: 'Servicio 1 funcionando' });
 });
 
-app.post('/datos', (req, res) => {
-    console.log('Servicio 1 recibió datos:', req.body);
-    res.json({ estado: "recibido", servicio: 1 });
+app.get('/data', (req, res) => {
+    res.json({ service: 'Backend', endpoints: ['/health', '/data'] });
 });
 
 app.listen(PORT, () => {
-    console.log(`Servicio 1 escuchando en el puerto ${PORT}`);
+    console.log(`Servicio 1 en puerto ${PORT}`);
 });
