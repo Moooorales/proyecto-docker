@@ -1,7 +1,8 @@
-FROM node:18-slim
+FROM python:3.11-slim
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["node", "index.js"]
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY server.py .
+EXPOSE 8000
+CMD ["fastapi", "run", "server.py", "--port", "8000"]
