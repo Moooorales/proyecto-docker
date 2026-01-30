@@ -4,10 +4,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DB_HOST=host.docker.internal  # Esto es "localhost" para Docker
+      - DB_HOST=host.docker.internal
       - DB_USER=postgres
-      - DB_PASSWORD=admin             # Según el comando del informe
-      - DB_NAME=mensajeria            # Según el comando del informe
+      - DB_PASSWORD=admin
+      - DB_NAME=mensajeria
       - DB_PORT=5432
     extra_hosts:
       - "host.docker.internal:host-gateway"
